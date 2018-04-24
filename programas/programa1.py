@@ -1,14 +1,15 @@
 import re
 import sys
+from programa4 import programa4
 
 if __name__ == '__main__':
 
 	fname = sys.argv[1]
 	sys.stdout = open(sys.argv[2], 'w')
 
-	pattern = re.compile(r'\(\*.*?\*\)|\{.*?\}|\/\/.*$|\b(if) *(.*?) +then|\b(while) *(.*?) +do|\b(for) *(.*?) +do', re.DOTALL)
+	pattern = re.compile(r'\b(if) *(.*?) +then|\b(while) *(.*?) +do|\b(for) *(.*?) +do', re.DOTALL)
 
-	matches = pattern.findall(open(fname,'r').read())
+	matches = pattern.findall(programa4(open(fname,'r').read()))
 	currentMatch = ''
 	ifMatchs = [match for match in matches if match[0] == 'if']
 	if(len(ifMatchs) > 0):
